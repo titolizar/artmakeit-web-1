@@ -391,10 +391,31 @@ const LabStudio = () => {
             </div>
           </div>
           
-          <div className="stacked-card card" style={{ height: '70vh', backgroundColor: '#ffffff', display: 'flex', flexDirection: 'column', justifyContent: 'center', boxShadow: '0 -10px 40px rgba(0,0,0,0.1)' }}>
-            <div className="telemetry-data" style={{ color: 'var(--color-red)', marginBottom: '1rem' }}>Fase 03</div>
-            <h2 className="h2" style={{ marginBottom: '2rem' }}>Materialización</h2>
-            <p className="h4" style={{ maxWidth: '600px', fontWeight: 500 }}>Corte láser, impresión 3D avanzada y ensamblaje robótico. Lo físico alcanza la perfección de lo digital.</p>
+          <div className="stacked-card card" style={{ 
+            height: '70vh', backgroundColor: '#ffffff', display: 'flex', flexDirection: 'column', 
+            justifyContent: 'center', position: 'relative', overflow: 'hidden', padding: 0,
+            boxShadow: '0 -10px 40px rgba(0,0,0,0.1)' 
+          }}>
+            {/* Background Image with Overlay */}
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
+              <img 
+                src={plotterImage} 
+                alt="Plotter Arquitectónico" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+              />
+              <div style={{ 
+                position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', 
+                background: 'linear-gradient(90deg, rgba(255,255,255,0.95) 30%, rgba(255,255,255,0.4) 60%, transparent 100%)' 
+              }} />
+            </div>
+
+            <div className="container" style={{ position: 'relative', zIndex: 10, paddingLeft: '5%', margin: 0, maxWidth: 'none' }}>
+              <h2 className="h2" style={{ marginBottom: '1.5rem', color: '#000', fontSize: '4rem' }}>Planos & Gran Formato</h2>
+              <p className="h4" style={{ maxWidth: '600px', fontWeight: 500, color: '#333', lineHeight: 1.6 }}>
+                Impresión técnica de alta precisión para tus maquetas y proyectos de arquitectura.<br/>
+                <span style={{ fontSize: '0.8rem', opacity: 0.7, fontWeight: 400 }}>Plotters de gran formato / Calibración milimétrica / Impresión HD de planos.</span>
+              </p>
+            </div>
           </div>
           
         </div>
