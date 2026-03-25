@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600&family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap');
+
+:root {
+  /* Colors */
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-red: #FF0000;
+  
+  /* Background/Foreground Default */
+  --bg-color: var(--color-black);
+  --text-color: var(--color-white);
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-serif-italic: 'Cormorant Garamond', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Utilities */
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 2rem;
+  --radius-full: 9999px;
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Base Reset & Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Typography Classes */
+.h1, .h2, .h3, .h4 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.04em; /* Tracking tight */
+  line-height: 1.1;
+}
+
+.h1 { font-size: clamp(3rem, 6vw, 5.5rem); }
+.h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
+.h3 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+
+/* Organic Emphasis (Garamond Italic) */
+.organic-emphasis {
+  font-family: var(--font-serif-italic);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: normal;
+  color: var(--color-white);
+}
+
+/* Telemetry / Data */
+.telemetry-data {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Subtle Noise Texture overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Utility Layouts */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Red accents */
+.accent-text { color: var(--color-red); }
+.accent-bg { background-color: var(--color-red); color: var(--color-white); }
+.accent-border { border-color: var(--color-red); }
+
+/* Cards & Containers */
+.card {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+}
+.card-dark {
+  background-color: #111;
+  color: var(--color-white);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+/* Hover Magnetic Button Base */
+.mag-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+/* Global Utility for pin spacers to prevent overflow issues */
+.pin-spacer {
+  margin: 0 !important;
+  padding: 0 !important;
+}
