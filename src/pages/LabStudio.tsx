@@ -133,7 +133,7 @@ const LabStudio = () => {
           end: "bottom top",
           endTrigger: ".cards-container",
           pin: true,
-          pinSpacing: false,
+          pinSpacing: true,
           scrub: true,
         }
       });
