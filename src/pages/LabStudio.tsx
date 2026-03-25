@@ -7,6 +7,7 @@ import heroImage from '../assets/hero-lab.jpg';
 import heroVideo from '../assets/hero-video.mp4';
 import maquetaImage from '../assets/maqueta.jpg';
 import iotImage from '../assets/iot.jpg';
+import plotterImage from '../assets/plotter.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
