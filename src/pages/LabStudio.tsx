@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import { Header, Footer, Pricing, Testimonials } from '../components/Shared';
+import heroImage from '../assets/hero-lab.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,14 +60,40 @@ const NumberCounter = ({ end, suffix = '' }: { end: number, suffix?: string }) =
 
 const LabStudio = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const heroTextRef = useRef<HTMLHeadingElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const scannerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Hero Parallax
-    gsap.to(heroTextRef.current, {
-      y: 200,
-      opacity: 0,
+    // Parallax hero elements
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const xPos = (clientX / window.innerWidth - 0.5) * 40;
+      const yPos = (clientY / window.innerHeight - 0.5) * 40;
+      
+      gsap.to('.hero-visual-container', {
+        x: xPos,
+        y: yPos,
+        duration: 1.5,
+        ease: "power2.out"
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    // Scanner Line Animation
+    gsap.to(scannerRef.current, {
+      top: '100%',
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: "power1.inOut"
+    });
+
+    // Hero Scroll Parallax
+    gsap.to(heroRef.current, {
+      y: 150,
+      opacity: 0.5,
       ease: 'none',
       scrollTrigger: {
         trigger: containerRef.current,
@@ -107,25 +134,69 @@ const LabStudio = () => {
       <Header />
       
       {/* HERO SECTION */}
-      <section style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
-        {/* Background Image Parallax Placeholder */}
-        <div style={{
-          position: 'absolute', top: 0, left: 0, width: '100%', height: '120%', 
-          backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3), var(--color-black)), url(https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-          zIndex: -1,
-          opacity: 0.4
-        }}></div>
+      <section style={{ height: '100vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-black)' }}>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.2fr) 1fr', gap: '4rem', alignItems: 'center', zIndex: 10 }}>
+          
+          <div className="hero-content" ref={heroRef}>
+            <div className="telemetry-data" style={{ color: 'var(--color-red)', marginBottom: '1.5rem' }}>
+              [ LAB_SYSTEM_ONLINE / V.0.4 ]
+            </div>
+            <h1 className="h1" style={{ fontSize: 'clamp(4rem, 8vw, 9rem)', lineHeight: 0.85, marginBottom: '2rem' }}>
+              CREATIVIDAD <br/>
+              <span className="outline-text">CON PRECISIÓN</span>
+            </h1>
+            <p className="p-large" style={{ maxWidth: '500px', marginBottom: '3rem', opacity: 0.8 }}>
+              Materializamos las ideas más complejas a través de fabricación digital y tecnología de vanguardia.
+            </p>
+            <div style={{ display: 'flex', gap: '2rem' }}>
+              <button className="mag-btn accent-bg">VER PROYECTOS</button>
+              <button className="mag-btn">EXPLORAR LAB</button>
+            </div>
+          </div>
 
-        <div className="container" style={{ textAlign: 'center', zIndex: 1 }} ref={heroTextRef}>
-          <h1 className="h1" style={{ maxWidth: '1000px', margin: '0 auto' }}>
-            Materializamos las ideas <span className="organic-emphasis">complejas</span> para los futuros arquitectos.
-          </h1>
-          <p className="h3 organic-emphasis" style={{ marginTop: '2rem', color: '#ccc' }}>
-            Hagamos las cosas mejor, juntos.
-          </p>
+          <div className="hero-visual-container" style={{ position: 'relative', height: '100%', display: 'flex', alignItems: 'center' }}>
+            <div style={{ 
+              position: 'relative', width: '100%', aspectRatio: '16/9', 
+              border: '1px solid #333', overflow: 'hidden',
+              boxShadow: '0 30px 100px rgba(0,0,0,0.5)'
+            }}>
+              <img 
+                src={heroImage} 
+                alt="Architectural Precision" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+              />
+              {/* Scanner Overlay */}
+              <div 
+                ref={scannerRef}
+                style={{
+                  position: 'absolute', top: 0, left: 0, width: '100%', height: '2px',
+                  backgroundColor: 'var(--color-red)', boxShadow: '0 0 15px var(--color-red)',
+                  zIndex: 2
+                }}
+              />
+              {/* Technical Grid Overlay */}
+              <div style={{
+                position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+                backgroundImage: 'radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)',
+                backgroundSize: '20px 20px', pointerEvents: 'none'
+              }} />
+            </div>
+
+            {/* Floating Telemetry Points */}
+            <div className="telemetry-data" style={{ 
+              position: 'absolute', top: '-10%', right: '5%', 
+              backgroundColor: 'rgba(0,0,0,0.8)', padding: '1rem', borderLeft: '2px solid var(--color-red)'
+            }}>
+              MOD_Z: 4.85mm<br/>REF: BLUEPRINT_01
+            </div>
+            <div className="telemetry-data" style={{ 
+              position: 'absolute', bottom: '10%', left: '-10%', 
+              backgroundColor: 'rgba(0,0,0,0.8)', padding: '1rem', borderRight: '2px solid var(--color-red)'
+            }}>
+              SCALE: 1:1<br/>STATUS: RENDERING...
+            </div>
+          </div>
+
         </div>
       </section>
 
