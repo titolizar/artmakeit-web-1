@@ -341,7 +341,7 @@ const LabStudio = () => {
       </section>
 
       {/* STACKED CARDS PROTOCOL */}
-      <section className="cards-container" ref={cardsRef} style={{ padding: '5rem 0 100vh 0', backgroundColor: 'var(--color-black)', position: 'relative', zIndex: 10 }}>
+      <section className="cards-container" ref={cardsRef} style={{ padding: '5rem 0 150vh 0', backgroundColor: 'var(--color-black)', position: 'relative', zIndex: 10 }}>
         <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '100px' }}>
           
           <div className="stacked-card card" style={{ 
@@ -478,7 +478,7 @@ const LabStudio = () => {
       </section>
 
       {/* STUDENT MARKETPLACE TEASER */}
-      <section style={{ padding: '8rem 0', backgroundColor: 'var(--color-black)', borderTop: '1px solid #222', position: 'relative', zIndex: 5 }}>
+      <section style={{ padding: '12rem 0', backgroundColor: 'var(--color-black)', borderTop: '1px solid #222', position: 'relative', zIndex: 5 }}>
         <div className="container" style={{ textAlign: 'center' }}>
           <div className="telemetry-data" style={{ color: 'var(--color-red)', marginBottom: '1rem' }}>[ MARKETPLACE ESTUDIANTIL ]</div>
           <h2 className="h2" style={{ marginBottom: '2rem' }}>Equipamiento de <span className="organic-emphasis">Segunda Mano</span></h2>
