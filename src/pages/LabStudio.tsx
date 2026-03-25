@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import { Header, Footer, Pricing, Testimonials } from '../components/Shared';
 import heroImage from '../assets/hero-lab.jpg';
+import heroVideo from '../assets/hero-video.mp4';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -146,14 +147,19 @@ const LabStudio = () => {
             zIndex: 1, backgroundColor: '#000'
           }}
         >
-          <img 
-            src={heroImage} 
-            alt="Arquitectura" 
+          <video 
+            autoPlay 
+            muted 
+            loop 
+            playsInline
+            poster={heroImage}
             style={{ 
               width: '100%', height: '100%', objectFit: 'cover', 
-              opacity: 0.6, filter: 'grayscale(20%) brightness(0.7) contrast(1.1)' 
+              opacity: 0.7, filter: 'grayscale(20%) brightness(0.6) contrast(1.1)' 
             }} 
-          />
+          >
+            <source src={heroVideo} type="video/mp4" />
+          </video>
           
           {/* Active Scanner Line (Full Screen) */}
           <div 
