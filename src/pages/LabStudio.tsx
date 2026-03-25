@@ -9,6 +9,7 @@ import maquetaImage from '../assets/maqueta.jpg';
 import iotImage from '../assets/iot.jpg';
 import plotterImage from '../assets/plotter.jpg';
 import corteImage from '../assets/corte.jpg';
+import cinetecaImage from '../assets/cineteca.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -442,6 +443,33 @@ const LabStudio = () => {
               <p className="h4" style={{ maxWidth: '600px', fontWeight: 500, color: '#333', lineHeight: 1.6 }}>
                 Fabricación digital en Balsa, Acrílico, Cartón y más.<br/>
                 <span style={{ fontSize: '0.8rem', opacity: 0.7, fontWeight: 400 }}>Corte y Grabado / Materiales de Oficina / Prototipado Rápido.</span>
+              </p>
+            </div>
+          </div>
+
+          <div className="stacked-card card" style={{ 
+            height: '70vh', backgroundColor: '#ffffff', display: 'flex', flexDirection: 'column', 
+            justifyContent: 'center', position: 'relative', overflow: 'hidden', padding: 0,
+            boxShadow: '0 -10px 40px rgba(0,0,0,0.1)' 
+          }}>
+            {/* Background Image with Overlay */}
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
+              <img 
+                src={cinetecaImage} 
+                alt="Streaming de Diseño" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+              />
+              <div style={{ 
+                position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', 
+                background: 'linear-gradient(90deg, rgba(255,255,255,0.95) 30%, rgba(255,255,255,0.4) 60%, transparent 100%)' 
+              }} />
+            </div>
+
+            <div className="container" style={{ position: 'relative', zIndex: 10, paddingLeft: '5%', margin: 0, maxWidth: 'none' }}>
+              <h2 className="h2" style={{ marginBottom: '1.5rem', color: '#000', fontSize: '4rem' }}>Streaming de Diseño</h2>
+              <p className="h4" style={{ maxWidth: '600px', fontWeight: 500, color: '#333', lineHeight: 1.6 }}>
+                Inspiración arquitectónica 24/7 en alta definición.<br/>
+                <span style={{ fontSize: '0.8rem', opacity: 0.7, fontWeight: 400 }}>Netflix Architecture / 4K Renders / Site Visits / Masterclasses.</span>
               </p>
             </div>
           </div>
