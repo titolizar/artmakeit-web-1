@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Header, Footer, Pricing, Testimonials } from '../components/Shared';
 import heroImage from '../assets/hero-lab.jpg';
 import heroVideo from '../assets/hero-video.mp4';
+import maquetaImage from '../assets/maqueta.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -339,10 +340,28 @@ const LabStudio = () => {
       <section className="cards-container" ref={cardsRef} style={{ padding: '5rem 0 20rem 0', backgroundColor: 'var(--color-black)' }}>
         <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '100px' }}>
           
-          <div className="stacked-card card" style={{ height: '70vh', backgroundColor: '#f5f5f5', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <div className="telemetry-data" style={{ color: 'var(--color-red)', marginBottom: '1rem' }}>Fase 01</div>
-            <h2 className="h2" style={{ marginBottom: '2rem' }}>Escaneo & Precisión 3D</h2>
-            <p className="h4" style={{ maxWidth: '600px', fontWeight: 500 }}>Digitalización milimétrica de espacios y maquetas para asegurar una fabricación sin margen de error.</p>
+          <div className="stacked-card card" style={{ 
+            height: '70vh', backgroundColor: '#f5f5f5', display: 'flex', flexDirection: 'column', 
+            justifyContent: 'center', position: 'relative', overflow: 'hidden', padding: 0 
+          }}>
+            {/* Background Image with Overlay */}
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
+              <img 
+                src={maquetaImage} 
+                alt="Maqueta Arquitectónica" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+              />
+              <div style={{ 
+                position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', 
+                background: 'linear-gradient(90deg, rgba(255,255,255,0.95) 30%, rgba(255,255,255,0.4) 60%, transparent 100%)' 
+              }} />
+            </div>
+
+            <div className="container" style={{ position: 'relative', zIndex: 10 }}>
+              <div className="telemetry-data" style={{ color: 'var(--color-red)', marginBottom: '1rem' }}>Fase 01</div>
+              <h2 className="h2" style={{ marginBottom: '2rem', color: '#000' }}>Escaneo & Precisión 3D</h2>
+              <p className="h4" style={{ maxWidth: '600px', fontWeight: 500, color: '#333' }}>Digitalización milimétrica de espacios y maquetas para asegurar una fabricación sin margen de error.</p>
+            </div>
           </div>
           
           <div className="stacked-card card" style={{ height: '70vh', backgroundColor: '#e0e0e0', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
