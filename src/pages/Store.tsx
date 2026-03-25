@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from '../lib/supabase';
 import { Header, Footer } from '../components/Shared';
 
@@ -8,6 +8,8 @@ const Store = () => {
   const [filter, setFilter] = useState('Todo');
   const [showModal, setShowModal] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   // Form states
   const [formData, setFormData] = useState({
@@ -59,6 +61,32 @@ const Store = () => {
       return;
     }
 
+    let image_url = '';
+    
+    // 1. Upload Image to Supabase Storage
+    if (selectedFile) {
+      const fileExt = selectedFile.name.split('.').pop();
+      const fileName = `${Math.random()}.${fileExt}`;
+      const filePath = `product-images/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('product-images')
+        .upload(filePath, selectedFile);
+
+      if (uploadError) {
+        alert("Error al subir imagen: " + uploadError.message + "\n(Asegúrate de tener un bucket 'product-images' público)");
+        setUploading(false);
+        return;
+      }
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('product-images')
+        .getPublicUrl(filePath);
+      
+      image_url = publicUrl;
+    }
+
+    // 2. Insert into DB
     const { error } = await supabase
       .from('student_products')
       .insert([
@@ -69,7 +97,8 @@ const Store = () => {
           condition: formData.condition,
           description: formData.description,
           seller_id: currentUser.id === '00000000-0000-0000-0000-000000000000' ? null : currentUser.id,
-          status: 'available'
+          status: 'available',
+          image_url: image_url
         }
       ]);
 
@@ -247,8 +276,25 @@ const Store = () => {
                 </select>
               </div>
 
+              <div>
+                <label className="telemetry-data" style={{ display: 'block', marginBottom: '0.5rem', color: '#888' }}>Foto del Producto</label>
+                <div 
+                  onClick={() => fileInputRef.current?.click()}
+                  style={{ border: '1px solid #333', padding: '1.5rem', textAlign: 'center', color: selectedFile ? 'var(--color-red)' : '#666', borderRadius: '4px', cursor: 'pointer', backgroundColor: '#181818' }}
+                >
+                  {selectedFile ? `✔ ${selectedFile.name}` : 'Click para seleccionar imagen'}
+                </div>
+                <input 
+                  type="file" 
+                  ref={fileInputRef} 
+                  onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+                  style={{ display: 'none' }} 
+                  accept="image/*"
+                />
+              </div>
+
               <button type="submit" disabled={uploading} className="mag-btn accent-bg" style={{ padding: '1.5rem', width: '100%', marginTop: '1rem', opacity: uploading ? 0.5 : 1 }}>
-                {uploading ? 'PUBLICANDO...' : 'SUBIR AL ECOSISTEMA'}
+                {uploading ? 'PROCESANDO SUBIDA...' : 'SUBIR AL ECOSISTEMA'}
               </button>
             </form>
           </div>
