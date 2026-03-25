@@ -358,10 +358,9 @@ const LabStudio = () => {
               }} />
             </div>
 
-            <div className="container" style={{ position: 'relative', zIndex: 10 }}>
-              <div className="telemetry-data" style={{ color: 'var(--color-red)', marginBottom: '1rem' }}>Fase 01</div>
-              <h2 className="h2" style={{ marginBottom: '2rem', color: '#000' }}>Escaneo & Precisión 3D</h2>
-              <p className="h4" style={{ maxWidth: '600px', fontWeight: 500, color: '#333' }}>Digitalización milimétrica de espacios y maquetas para asegurar una fabricación sin margen de error.</p>
+            <div className="container" style={{ position: 'relative', zIndex: 10, paddingLeft: '5%', margin: 0, maxWidth: 'none' }}>
+              <h2 className="h2" style={{ marginBottom: '1.5rem', color: '#000', fontSize: '4rem' }}>Escaneo & Precisión 3D</h2>
+              <p className="h4" style={{ maxWidth: '500px', fontWeight: 500, color: '#333', lineHeight: 1.4 }}>Digitalización milimétrica de espacios y maquetas para asegurar una fabricación sin margen de error.</p>
             </div>
           </div>
           
@@ -382,10 +381,9 @@ const LabStudio = () => {
               }} />
             </div>
 
-            <div className="container" style={{ position: 'relative', zIndex: 10 }}>
-              <div className="telemetry-data" style={{ color: 'var(--color-red)', marginBottom: '1rem' }}>Fase 02</div>
-              <h2 className="h2" style={{ marginBottom: '2rem', color: '#000' }}>Interconexión IoT</h2>
-              <p className="h4" style={{ maxWidth: '600px', fontWeight: 500, color: '#333' }}>Equipos de fabricación conectados a la nube transmitiendo telemetría en tiempo real a tu estudio.</p>
+            <div className="container" style={{ position: 'relative', zIndex: 10, paddingLeft: '5%', margin: 0, maxWidth: 'none' }}>
+              <h2 className="h2" style={{ marginBottom: '1.5rem', color: '#000', fontSize: '4rem' }}>Interconexión IoT</h2>
+              <p className="h4" style={{ maxWidth: '500px', fontWeight: 500, color: '#333', lineHeight: 1.4 }}>Equipos de fabricación conectados a la nube transmitiendo telemetría en tiempo real a tu estudio.</p>
             </div>
           </div>
           
