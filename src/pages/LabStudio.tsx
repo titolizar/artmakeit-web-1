@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'react-router-dom';
 import { Header, Footer, Pricing, Testimonials } from '../components/Shared';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -226,6 +227,25 @@ const LabStudio = () => {
             <p className="h4" style={{ maxWidth: '600px', fontWeight: 500 }}>Corte láser, impresión 3D avanzada y ensamblaje robótico. Lo físico alcanza la perfección de lo digital.</p>
           </div>
           
+        </div>
+      </section>
+
+      {/* STUDENT MARKETPLACE TEASER */}
+      <section style={{ padding: '8rem 0', backgroundColor: 'var(--color-black)', borderTop: '1px solid #222' }}>
+        <div className="container" style={{ textAlign: 'center' }}>
+          <div className="telemetry-data" style={{ color: 'var(--color-red)', marginBottom: '1rem' }}>[ MARKETPLACE ESTUDIANTIL ]</div>
+          <h2 className="h2" style={{ marginBottom: '2rem' }}>Equipamiento de <span className="organic-emphasis">Segunda Mano</span></h2>
+          <p className="h4" style={{ color: '#888', maxWidth: '600px', margin: '0 auto 4rem auto' }}>Encuentra mesas de dibujo, electrónica y materiales a precios accesibles de otros estudiantes del ecosistema.</p>
+          
+          <Link to="/store" className="mag-btn" style={{ 
+            padding: '2rem 4rem', 
+            backgroundColor: 'var(--color-white)', 
+            color: 'var(--color-black)',
+            fontSize: '1.25rem',
+            border: '2px solid var(--color-white)'
+          }}>
+            ENTRAR AL MARKETPLACE
+          </Link>
         </div>
       </section>
 
