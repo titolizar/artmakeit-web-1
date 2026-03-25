@@ -130,73 +130,90 @@ const LabStudio = () => {
   }, []);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} style={{ backgroundColor: 'var(--color-black)', color: 'white' }}>
       <Header />
       
-      {/* HERO SECTION */}
-      <section style={{ height: '100vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-black)' }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.2fr) 1fr', gap: '4rem', alignItems: 'center', zIndex: 10 }}>
+      {/* FULL SCREEN HERO SECTION */}
+      <section style={{ 
+        height: '100vh', width: '100%', position: 'relative', overflow: 'hidden', 
+        display: 'flex', alignItems: 'center', justifyContent: 'center' 
+      }}>
+        {/* Immersive Background Image */}
+        <div 
+          ref={heroRef}
+          style={{
+            position: 'absolute', top: '-10%', left: '-10%', width: '120%', height: '120%', 
+            zIndex: 1, backgroundColor: '#000'
+          }}
+        >
+          <img 
+            src={heroImage} 
+            alt="Arquitectura" 
+            style={{ 
+              width: '100%', height: '100%', objectFit: 'cover', 
+              opacity: 0.6, filter: 'grayscale(20%) brightness(0.7) contrast(1.1)' 
+            }} 
+          />
           
-          <div className="hero-content" ref={heroRef}>
-            <div className="telemetry-data" style={{ color: 'var(--color-red)', marginBottom: '1.5rem' }}>
-              [ LAB_SYSTEM_ONLINE / V.0.4 ]
-            </div>
-            <h1 className="h1" style={{ fontSize: 'clamp(4rem, 8vw, 9rem)', lineHeight: 0.85, marginBottom: '2rem' }}>
-              CREATIVIDAD <br/>
-              <span className="outline-text">CON PRECISIÓN</span>
-            </h1>
-            <p className="p-large" style={{ maxWidth: '500px', marginBottom: '3rem', opacity: 0.8 }}>
-              Materializamos las ideas más complejas a través de fabricación digital y tecnología de vanguardia.
+          {/* Active Scanner Line (Full Screen) */}
+          <div 
+            ref={scannerRef}
+            style={{
+              position: 'absolute', top: 0, left: 0, width: '100%', height: '3px',
+              background: 'linear-gradient(90deg, transparent, var(--color-red), transparent)',
+              boxShadow: '0 0 20px var(--color-red)',
+              zIndex: 5, opacity: 0.8
+            }}
+          />
+
+          {/* Technical Blueprint Grid Overlay */}
+          <div style={{
+            position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+            backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
+            backgroundSize: '100px 100px', pointerEvents: 'none', zIndex: 2
+          }} />
+        </div>
+
+        {/* Content Overlay */}
+        <div className="container" style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
+          <div className="telemetry-data" style={{ color: 'var(--color-red)', letterSpacing: '0.4em', marginBottom: '2rem', fontSize: '0.75rem' }}>
+            [ ARTMAKEIT / ECOSYSTEM-LAB_V4.0 ]
+          </div>
+          
+          <h1 className="h1" style={{ 
+            fontSize: 'clamp(5rem, 15vw, 14rem)', 
+            lineHeight: 0.8, 
+            letterSpacing: '-0.04em',
+            margin: '0 0 4rem 0'
+          }}>
+            CREATIVIDAD<br/>
+            <span className="outline-text" style={{ WebkitTextStroke: '2px white' }}>PRECISA</span>
+          </h1>
+
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '4rem', alignItems: 'flex-start' }}>
+            <p className="telemetry-data" style={{ maxWidth: '300px', textAlign: 'left', lineHeight: 1.8, fontSize: '0.65rem', opacity: 0.6 }}>
+              LA UNIÓN ENTRE LA IDEA ARQUITECTÓNICA Y LA EJECUCCIÓN FÍSICA A TRAVÉS DE FABRICACIÓN DIGITAL.
             </p>
-            <div style={{ display: 'flex', gap: '2rem' }}>
-              <button className="mag-btn accent-bg">VER PROYECTOS</button>
-              <button className="mag-btn">EXPLORAR LAB</button>
+            <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1rem' }}>
+              <button className="mag-btn accent-bg" style={{ padding: '1.5rem 3rem' }}>EXPLORAR PROYECTOS</button>
+              <button className="mag-btn" style={{ padding: '1.5rem 3rem', border: '1px solid white' }}>EQUIPAMIENTO</button>
             </div>
+            <p className="telemetry-data" style={{ maxWidth: '300px', textAlign: 'right', lineHeight: 1.8, fontSize: '0.65rem', opacity: 0.6 }}>
+              COORDINATES: 0.45N / 78.50W<br/>
+              STATUS: CORE_SYSTEM_STABLE<br/>
+              RENDERING_ENGINE: GSAP_PRO
+            </p>
           </div>
+        </div>
 
-          <div className="hero-visual-container" style={{ position: 'relative', height: '100%', display: 'flex', alignItems: 'center' }}>
-            <div style={{ 
-              position: 'relative', width: '100%', aspectRatio: '16/9', 
-              border: '1px solid #333', overflow: 'hidden',
-              boxShadow: '0 30px 100px rgba(0,0,0,0.5)'
-            }}>
-              <img 
-                src={heroImage} 
-                alt="Architectural Precision" 
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-              />
-              {/* Scanner Overlay */}
-              <div 
-                ref={scannerRef}
-                style={{
-                  position: 'absolute', top: 0, left: 0, width: '100%', height: '2px',
-                  backgroundColor: 'var(--color-red)', boxShadow: '0 0 15px var(--color-red)',
-                  zIndex: 2
-                }}
-              />
-              {/* Technical Grid Overlay */}
-              <div style={{
-                position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-                backgroundImage: 'radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)',
-                backgroundSize: '20px 20px', pointerEvents: 'none'
-              }} />
-            </div>
-
-            {/* Floating Telemetry Points */}
-            <div className="telemetry-data" style={{ 
-              position: 'absolute', top: '-10%', right: '5%', 
-              backgroundColor: 'rgba(0,0,0,0.8)', padding: '1rem', borderLeft: '2px solid var(--color-red)'
-            }}>
-              MOD_Z: 4.85mm<br/>REF: BLUEPRINT_01
-            </div>
-            <div className="telemetry-data" style={{ 
-              position: 'absolute', bottom: '10%', left: '-10%', 
-              backgroundColor: 'rgba(0,0,0,0.8)', padding: '1rem', borderRight: '2px solid var(--color-red)'
-            }}>
-              SCALE: 1:1<br/>STATUS: RENDERING...
-            </div>
-          </div>
-
+        {/* Floating Screen Data Points */}
+        <div className="telemetry-data" style={{ position: 'absolute', bottom: '5%', left: '5%', zIndex: 20, opacity: 0.4 }}>
+          [01] DESIGN_PHASE: ALPHA<br/>
+          [02] FAB_PROTOCOL: ACTIVE
+        </div>
+        <div className="telemetry-data" style={{ position: 'absolute', bottom: '5%', right: '5%', zIndex: 20, opacity: 0.4 }}>
+          EST. 2026<br/>
+          AMIT-DSG-004
         </div>
       </section>
 
