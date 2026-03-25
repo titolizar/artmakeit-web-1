@@ -6,6 +6,13 @@ export const Header = () => {
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
+    // Check for demo session first
+    const demoUser = localStorage.getItem('demo_session');
+    if (demoUser) {
+      setUser(JSON.parse(demoUser));
+      return;
+    }
+
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
     });
@@ -16,6 +23,13 @@ export const Header = () => {
 
     return () => subscription.unsubscribe();
   }, []);
+
+  const handleLogout = async () => {
+    localStorage.removeItem('demo_session');
+    await supabase.auth.signOut();
+    setUser(null);
+    window.location.reload();
+  };
 
   return (
     <header style={{ position: 'fixed', top: 0, left: 0, width: '100%', padding: '2rem', zIndex: 100, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -34,7 +48,7 @@ export const Header = () => {
             <div style={{ width: '8px', height: '8px', backgroundColor: '#0f0', borderRadius: '50%' }}></div>
             <span className="telemetry-data">{user.email?.split('@')[0]}</span>
             <button 
-              onClick={() => supabase.auth.signOut()}
+              onClick={handleLogout}
               style={{ background: 'none', border: 'none', color: 'var(--color-red)', cursor: 'pointer', fontSize: '1.5rem', padding: '0 4px' }}
             >
               ×

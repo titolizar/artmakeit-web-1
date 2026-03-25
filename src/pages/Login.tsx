@@ -30,6 +30,14 @@ const Login = () => {
     setLoading(false);
   };
 
+  const handleDemoLogin = () => {
+    // Mock user for demo purposes
+    const demoUser = { email: 'demo@artmakeit.com', id: '00000000-0000-0000-0000-000000000000' };
+    localStorage.setItem('demo_session', JSON.stringify(demoUser));
+    navigate('/store');
+    window.location.reload(); // Refresh to update Shared Header state
+  };
+
   return (
     <>
       <Header />
@@ -67,6 +75,19 @@ const Login = () => {
               {loading ? 'PROCESANDO...' : (isSignUp ? 'REGISTRARSE' : 'ENTRAR')}
             </button>
           </form>
+
+          {!isSignUp && (
+            <>
+              <div style={{ margin: '1rem 0', textAlign: 'center', color: '#333', fontSize: '0.75rem' }}>O TAMBIÉN</div>
+              <button 
+                onClick={handleDemoLogin}
+                className="mag-btn" 
+                style={{ padding: '1rem', width: '100%', border: '1px solid var(--color-red)', color: 'var(--color-red)' }}
+              >
+                ENTRAR COMO INVITADO (DEMO)
+              </button>
+            </>
+          )}
 
           <button 
             onClick={() => setIsSignUp(!isSignUp)}

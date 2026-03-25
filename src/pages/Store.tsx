@@ -47,11 +47,14 @@ const Store = () => {
     e.preventDefault();
     setUploading(true);
 
-    // For now, we use a placeholder or check for session
+    // Check for demo session or real session
+    const demoUserStr = localStorage.getItem('demo_session');
     const { data: { session } } = await supabase.auth.getSession();
     
-    if (!session) {
-      alert("Debes iniciar sesión para publicar. (Supabase Auth está listo)");
+    const currentUser = session?.user || (demoUserStr ? JSON.parse(demoUserStr) : null);
+    
+    if (!currentUser) {
+      alert("Debes iniciar sesión para publicar.");
       setUploading(false);
       return;
     }
@@ -65,7 +68,7 @@ const Store = () => {
           category: formData.category,
           condition: formData.condition,
           description: formData.description,
-          seller_id: session.user.id,
+          seller_id: currentUser.id === '00000000-0000-0000-0000-000000000000' ? null : currentUser.id,
           status: 'available'
         }
       ]);
