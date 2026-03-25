@@ -35,11 +35,14 @@ const Typewriter = ({ messages }: { messages: string[] }) => {
   return <div className="telemetry-data">{text}<span style={{ animation: 'blink 1s infinite' }}>_</span></div>;
 };
 
-const NumberCounter = ({ end, suffix = '' }: { end: number, suffix?: string }) => {
+const NumberCounter = ({ end, suffix = '', incrementRate = 0 }: { end: number, suffix?: string, incrementRate?: number }) => {
+  const [displayValue, setDisplayValue] = useState(end);
   const nodeRef = useRef<HTMLSpanElement>(null);
   
   useEffect(() => {
     if (!nodeRef.current) return;
+    
+    // Initial Animation
     const obj = { val: 0 };
     gsap.to(obj, {
       val: end,
@@ -49,14 +52,20 @@ const NumberCounter = ({ end, suffix = '' }: { end: number, suffix?: string }) =
         start: 'top 80%',
       },
       onUpdate: () => {
-        if (nodeRef.current) {
-          nodeRef.current.innerText = Math.floor(obj.val).toString() + suffix;
-        }
+        setDisplayValue(Math.floor(obj.val));
       }
     });
-  }, [end, suffix]);
 
-  return <span ref={nodeRef} style={{ fontSize: '3rem', fontWeight: 'bold' }}>0{suffix}</span>;
+    // Real-time increment if rate provided
+    if (incrementRate > 0) {
+      const interval = setInterval(() => {
+        setDisplayValue(prev => prev + 1);
+      }, (7 * 24 * 60 * 60 * 1000) / incrementRate); // ms per project
+      return () => clearInterval(interval);
+    }
+  }, [end, incrementRate]);
+
+  return <span ref={nodeRef} style={{ fontSize: '3rem', fontWeight: 'bold' }}>{displayValue}{suffix}</span>;
 };
 
 const LabStudio = () => {
@@ -228,21 +237,39 @@ const LabStudio = () => {
         <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
           
           {/* Instrument 1: Projects & Budget */}
-          <div className="card-dark" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', borderTop: '4px solid var(--color-white)' }}>
-            <div className="telemetry-data" style={{ color: '#888' }}>[SYS.01] Proyectos & Material</div>
+          <div 
+            className="card-dark instrument-card" 
+            style={{ display: 'flex', flexDirection: 'column', gap: '1rem', borderTop: '4px solid var(--color-white)', transition: 'all 0.4s ease' }}
+            onMouseEnter={(e) => {
+              gsap.to(e.currentTarget, { scale: 1.05, borderColor: 'var(--color-red)', duration: 0.3 });
+            }}
+            onMouseLeave={(e) => {
+              gsap.to(e.currentTarget, { scale: 1, borderColor: 'white', duration: 0.3 });
+            }}
+          >
+            <div className="telemetry-data" style={{ color: '#888' }}>[ 2026 ] Proyectos & Material</div>
             <div>
-              <NumberCounter end={342} />
+              <NumberCounter end={2485} incrementRate={40} />
               <div className="telemetry-data" style={{ color: '#666' }}>Proyectos Fabricados</div>
             </div>
             <div style={{ marginTop: 'auto' }}>
-              <NumberCounter end={12.4} suffix=" TON" />
+              <NumberCounter end={142.4} suffix=" TON" />
               <div className="telemetry-data" style={{ color: 'var(--color-red)' }}>Material Ahorrado</div>
             </div>
           </div>
 
           {/* Instrument 2: Fabrication Pipeline */}
-          <div className="card-dark" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', borderTop: '4px solid #444', height: '100%', minHeight: '250px' }}>
-            <div className="telemetry-data" style={{ color: '#888' }}>[SYS.02] Pipeline de Fabricación</div>
+          <div 
+            className="card-dark instrument-card" 
+            style={{ display: 'flex', flexDirection: 'column', gap: '1rem', borderTop: '4px solid #444', height: '100%', minHeight: '250px', transition: 'all 0.4s ease' }}
+            onMouseEnter={(e) => {
+              gsap.to(e.currentTarget, { scale: 1.05, borderColor: 'var(--color-red)', duration: 0.3 });
+            }}
+            onMouseLeave={(e) => {
+              gsap.to(e.currentTarget, { scale: 1, borderColor: '#444', duration: 0.3 });
+            }}
+          >
+            <div className="telemetry-data" style={{ color: '#888' }}>[ SYS.02 ] Pipeline de Fabricación</div>
             <div style={{ backgroundColor: '#000', padding: '1.5rem', borderRadius: '8px', border: '1px solid #222', flex: 1, display: 'flex', alignItems: 'center' }}>
               <Typewriter messages={[
                 "> Corte láser en curso: 78% completado...",
@@ -254,8 +281,17 @@ const LabStudio = () => {
           </div>
 
           {/* Instrument 3: Delivery Calendar */}
-          <div className="card-dark" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', borderTop: '4px solid var(--color-red)', position: 'relative', overflow: 'hidden' }}>
-            <div className="telemetry-data" style={{ color: '#888' }}>[SYS.03] Calendario de Entregas</div>
+          <div 
+            className="card-dark instrument-card" 
+            style={{ display: 'flex', flexDirection: 'column', gap: '1rem', borderTop: '4px solid var(--color-red)', position: 'relative', overflow: 'hidden', transition: 'all 0.4s ease' }}
+            onMouseEnter={(e) => {
+              gsap.to(e.currentTarget, { scale: 1.05, boxShadow: '0 0 40px rgba(255,0,0,0.15)', duration: 0.3 });
+            }}
+            onMouseLeave={(e) => {
+              gsap.to(e.currentTarget, { scale: 1, boxShadow: 'none', duration: 0.3 });
+            }}
+          >
+            <div className="telemetry-data" style={{ color: '#888' }}>[ SYS.03 ] Calendario de Entregas</div>
             
             {/* Grid background to represent calendar */}
             <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '4px', margin: '1rem 0' }}>
