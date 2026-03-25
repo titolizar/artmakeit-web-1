@@ -382,8 +382,11 @@ const LabStudio = () => {
             </div>
 
             <div className="container" style={{ position: 'relative', zIndex: 10, paddingLeft: '5%', margin: 0, maxWidth: 'none' }}>
-              <h2 className="h2" style={{ marginBottom: '1.5rem', color: '#000', fontSize: '4rem' }}>Interconexión IoT</h2>
-              <p className="h4" style={{ maxWidth: '500px', fontWeight: 500, color: '#333', lineHeight: 1.4 }}>Equipos de fabricación conectados a la nube transmitiendo telemetría en tiempo real a tu estudio.</p>
+              <h2 className="h2" style={{ marginBottom: '1.5rem', color: '#000', fontSize: '4rem' }}>Tu Nube de Diseño</h2>
+              <p className="h4" style={{ maxWidth: '600px', fontWeight: 500, color: '#333', lineHeight: 1.6 }}>
+                Cloud Storage / File Hosting / File Sync / Cloud Backup / Online Collaboration<br/>
+                <span style={{ fontSize: '0.8rem', opacity: 0.7, fontWeight: 400 }}>Todo sincronizado entre tus dispositivos y el laboratorio de fabricación.</span>
+              </p>
             </div>
           </div>
           
