@@ -133,7 +133,7 @@ const LabStudio = () => {
           end: "bottom top",
           endTrigger: ".cards-container",
           pin: true,
-          pinSpacing: true,
+          pinSpacing: false,
           scrub: true,
         }
       });
@@ -341,7 +341,7 @@ const LabStudio = () => {
       </section>
 
       {/* STACKED CARDS PROTOCOL */}
-      <section className="cards-container" ref={cardsRef} style={{ padding: '5rem 0 20rem 0', backgroundColor: 'var(--color-black)' }}>
+      <section className="cards-container" ref={cardsRef} style={{ padding: '5rem 0 350vh 0', backgroundColor: 'var(--color-black)', position: 'relative' }}>
         <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '100px' }}>
           
           <div className="stacked-card card" style={{ 
