@@ -196,9 +196,6 @@ const LabStudio = () => {
 
         {/* Content Overlay */}
         <div className="container" style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
-          <div className="telemetry-data" style={{ color: 'var(--color-red)', letterSpacing: '0.4em', marginBottom: '2rem', fontSize: '0.75rem' }}>
-            [ ARTMAKEIT / ECOSYSTEM-LAB_V4.0 ]
-          </div>
           
           <h1 className="h1" style={{ 
             fontSize: 'clamp(5rem, 15vw, 14rem)', 
@@ -210,30 +207,10 @@ const LabStudio = () => {
             <span className="outline-text" style={{ WebkitTextStroke: '2px white' }}>PRECISA</span>
           </h1>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '4rem', alignItems: 'flex-start' }}>
-            <p className="telemetry-data" style={{ maxWidth: '300px', textAlign: 'left', lineHeight: 1.8, fontSize: '0.65rem', opacity: 0.6 }}>
-              LA UNIÓN ENTRE LA IDEA ARQUITECTÓNICA Y LA EJECUCCIÓN FÍSICA A TRAVÉS DE FABRICACIÓN DIGITAL.
-            </p>
-            <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1rem' }}>
-              <button className="mag-btn accent-bg" style={{ padding: '1.5rem 3rem' }}>EXPLORAR PROYECTOS</button>
-              <button className="mag-btn" style={{ padding: '1.5rem 3rem', border: '1px solid white' }}>EQUIPAMIENTO</button>
-            </div>
-            <p className="telemetry-data" style={{ maxWidth: '300px', textAlign: 'right', lineHeight: 1.8, fontSize: '0.65rem', opacity: 0.6 }}>
-              COORDINATES: 0.45N / 78.50W<br/>
-              STATUS: CORE_SYSTEM_STABLE<br/>
-              RENDERING_ENGINE: GSAP_PRO
-            </p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginTop: '1rem' }}>
+            <button className="mag-btn accent-bg" style={{ padding: '1.5rem 3rem' }}>EXPLORAR PROYECTOS</button>
+            <button className="mag-btn" style={{ padding: '1.5rem 3rem', border: '1px solid white' }}>EQUIPAMIENTO</button>
           </div>
-        </div>
-
-        {/* Floating Screen Data Points */}
-        <div className="telemetry-data" style={{ position: 'absolute', bottom: '5%', left: '5%', zIndex: 20, opacity: 0.4 }}>
-          [01] DESIGN_PHASE: ALPHA<br/>
-          [02] FAB_PROTOCOL: ACTIVE
-        </div>
-        <div className="telemetry-data" style={{ position: 'absolute', bottom: '5%', right: '5%', zIndex: 20, opacity: 0.4 }}>
-          EST. 2026<br/>
-          AMIT-DSG-004
         </div>
       </section>
 
