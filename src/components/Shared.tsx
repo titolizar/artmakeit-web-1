@@ -1,18 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
 
-export const Header = () => (
-  <header style={{ position: 'fixed', top: 0, left: 0, width: '100%', padding: '2rem', zIndex: 100, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-    <Link to="/" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-white)', textDecoration: 'none', letterSpacing: '-0.05em' }}>
-      artmakeit<span className="accent-text">.</span>
-    </Link>
-    <div style={{ display: 'flex', gap: '2rem', fontSize: '0.875rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-      <span>Work</span>
-      <span>About</span>
-      <span>Contact</span>
-    </div>
-  </header>
-);
+export const Header = () => {
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  return (
+    <header style={{ position: 'fixed', top: 0, left: 0, width: '100%', padding: '2rem', zIndex: 100, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <Link to="/" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-white)', textDecoration: 'none', letterSpacing: '-0.05em' }}>
+        artmakeit<span className="accent-text">.</span>
+      </Link>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '3rem' }}>
+        <nav style={{ display: 'flex', gap: '2rem', fontSize: '0.875rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <Link to="/store" style={{ color: 'inherit', textDecoration: 'none' }}>Store</Link>
+          <span>Work</span>
+          <span>Contact</span>
+        </nav>
+        
+        {user ? (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '4px 12px', border: '1px solid #333', borderRadius: '4px' }}>
+            <div style={{ width: '8px', height: '8px', backgroundColor: '#0f0', borderRadius: '50%' }}></div>
+            <span className="telemetry-data">{user.email?.split('@')[0]}</span>
+            <button 
+              onClick={() => supabase.auth.signOut()}
+              style={{ background: 'none', border: 'none', color: 'var(--color-red)', cursor: 'pointer', fontSize: '1.5rem', padding: '0 4px' }}
+            >
+              ×
+            </button>
+          </div>
+        ) : (
+          <Link to="/login" className="mag-btn" style={{ padding: '0.5rem 1.5rem', border: '1px solid white' }}>LOGIN</Link>
+        )}
+      </div>
+    </header>
+  );
+};
 
 export const Testimonials = () => (
   <section className="container" style={{ padding: '8rem 5%' }}>
