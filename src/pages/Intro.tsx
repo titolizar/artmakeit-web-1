@@ -23,13 +23,13 @@ const LightStreaks = () => {
         });
 
         gsap.to(streak, {
-          opacity: 0.1,
+          opacity: 0.3, // Increased from 0.1
           duration: duration * 0.5,
           delay: delay,
           ease: "sine.inOut",
           yoyo: true,
           repeat: 1,
-          onComplete: animate
+          onComplete: () => animate() // Cast to avoid lint error
         });
 
         gsap.to(streak, {
