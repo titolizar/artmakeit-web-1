@@ -1,4 +1,4 @@
-import React from 'react';
+// No imports needed - Vite handles JSX transform automatically
 
 const products = [
   { 
